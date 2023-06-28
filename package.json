@@ -1,0 +1,25 @@
+{
+  "name": "@dittofeed/sdk-react-native",
+  "version": "0.0.1",
+  "description": "Dittofeed's react native sdk.",
+  "main": "./dist/cjs/src/index.js",
+  "module": "./dist/esm/src/index.js",
+  "types": "./dist/esm/src/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "repository": "git@github.com:dittofeed/sdk-react-native.git",
+  "author": "max@dittofeed.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.0"
+  },
+  "private": false,
+  "dependencies": {
+    "@types/react-native": "^0.72.2"
+  }
+}
