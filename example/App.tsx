@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { DittofeedReactNative } from "@dittofeed/sdk-react-native";
 
 export default function App() {
+  new DittofeedReactNative();
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
