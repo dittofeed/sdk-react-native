@@ -16,8 +16,8 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "typescript": "^5.1.0",
-    "@types/react-native": "^0.72.2"
+    "@types/react-native": "^0.72.2",
+    "typescript": "^5.1.0"
   },
-  "private": false
+  "packageManager": "yarn@3.6.0"
 }
