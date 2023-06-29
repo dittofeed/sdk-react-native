@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "dist/ejs",
     "types": ["react-native"],
     "target": "ES2015",
@@ -20,6 +21,6 @@
     "strict": true,
     "useUnknownInCatchVariables": true
   },
-  "include": ["./src/**/*.ts", "./scripts/**/*.ts", "./test/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
