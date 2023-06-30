@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    // "plugins": [
+    //   "@notifee/react-native"
+    // ],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -27,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7030b538-94b3-41cf-8aca-52fa6207619d"
+      }
     }
   }
 }

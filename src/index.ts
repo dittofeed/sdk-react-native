@@ -3,6 +3,7 @@ import messaging from "@react-native-firebase/messaging";
 
 interface DittofeedReactNativeInit {}
 
+// FIXME rename to DittofeedSDK
 export class DittofeedReactNative {
   private static instance: DittofeedReactNative;
 
@@ -10,6 +11,7 @@ export class DittofeedReactNative {
     console.log("DittofeedReactNative constructor");
   }
 
+  // FIXME rename init
   static async getInstance(
     initParams: DittofeedReactNativeInit
   ): Promise<DittofeedReactNative> {
