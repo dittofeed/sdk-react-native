@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "306337833196",
+    "project_id": "production-dittofeed",
+    "storage_bucket": "production-dittofeed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306337833196:android:7e7dd2fd7688d2c0ef85c9",
+        "android_client_info": {
+          "package_name": "com.dittofeed.expoexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306337833196-1p1f3rmsls6ejjrec2otufb33k71vpl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhJfbTyLQxFyzxIN6Nl0Im8hSPLGgOgR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306337833196-1p1f3rmsls6ejjrec2otufb33k71vpl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306337833196:android:dc67b4fffe916efaef85c9",
+        "android_client_info": {
+          "package_name": "com.maxgurewitz.expoexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306337833196-1p1f3rmsls6ejjrec2otufb33k71vpl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhJfbTyLQxFyzxIN6Nl0Im8hSPLGgOgR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306337833196-1p1f3rmsls6ejjrec2otufb33k71vpl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
