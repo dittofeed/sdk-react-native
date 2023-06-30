@@ -1,9 +1,7 @@
 import notifee, { Event } from "@notifee/react-native";
-import type { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 
-interface DittofeedReactNativeInit {
-  messaging: FirebaseMessagingTypes.Module;
-}
+interface DittofeedReactNativeInit {}
 
 export class DittofeedReactNative {
   private static instance: DittofeedReactNative;
@@ -22,9 +20,9 @@ export class DittofeedReactNative {
     return DittofeedReactNative.instance;
   }
 
-  private async init({ messaging }: DittofeedReactNativeInit) {
-    await messaging.registerDeviceForRemoteMessages();
-    const token = await messaging.getToken();
+  private async init({}: DittofeedReactNativeInit) {
+    await messaging().registerDeviceForRemoteMessages();
+    const token = await messaging().getToken();
     // TODO inject overridable logger
     void this.submitToken(token).catch(console.error);
     // TODO allow channel to be overridden
@@ -34,7 +32,7 @@ export class DittofeedReactNative {
       visibility: 1,
       importance: 4,
     });
-    messaging.onTokenRefresh(this.submitToken);
+    messaging().onTokenRefresh(this.submitToken);
     notifee.onBackgroundEvent(this.handlBackgroundEvent);
   }
 
