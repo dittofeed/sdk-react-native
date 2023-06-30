@@ -16,13 +16,17 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
+    "@react-native-firebase/app": "^18.1.0",
+    "@react-native-firebase/messaging": "^18.1.0",
     "@types/react-native": "^0.72.2",
     "typescript": "^5.1.0"
   },
   "packageManager": "yarn@3.6.0",
-  "dependencies": {
-    "@notifee/react-native": "^7.8.0",
+  "peerDependencies": {
     "@react-native-firebase/app": "^18.1.0",
     "@react-native-firebase/messaging": "^18.1.0"
+  },
+  "dependencies": {
+    "@notifee/react-native": "^7.8.0"
   }
 }
