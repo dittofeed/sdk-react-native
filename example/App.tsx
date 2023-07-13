@@ -8,13 +8,14 @@ export default function App() {
   useEffect(() => {
     (async () => {
       await DittofeedSdk.init({
-        writeKey:
-          "Basic ZGNlODRiYzctMzBiMi00Y2VjLTgxMGMtNTc3ZjFhYmViODZhOmYxODFhYWRjMWU1ZTllNDY=",
-        host: "http://10.0.2.2:3001",
+        writeKey: "Basic abcd",
       });
-      await DittofeedSdk.identify({
+
+      DittofeedSdk.identify({
         userId: "123",
-        traits: {},
+        traits: {
+          email: "john@email.com",
+        },
       });
     })();
   }, []);
