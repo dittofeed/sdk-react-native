@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { BatchQueue } from "./batchQueue";
-import { v4 as uuidv4 } from "uuid";
+import uuid from "react-native-uuid";
+
+const uuidv4 = () => uuid.v4() as string;
 
 export enum EventType {
   Identify = "identify",
@@ -9,7 +11,7 @@ export enum EventType {
   Screen = "screen",
 }
 
-export type AppDataContext = Record<string, any> | undefined;
+export type AppDataContext = Record<string, any>;
 
 export interface BaseAppData {
   messageId?: string;
@@ -17,7 +19,7 @@ export interface BaseAppData {
 }
 
 export interface BaseIdentifyData extends BaseAppData {
-  context: AppDataContext;
+  context?: AppDataContext;
   traits?: Record<string, any>;
 }
 
@@ -50,7 +52,7 @@ export type BatchIdentifyData =
   | BatchIdentifyDataWithAnonymousId;
 
 export interface BaseTrackData extends BaseAppData {
-  context: AppDataContext;
+  context?: AppDataContext;
   event: string;
   properties?: Record<string, any>;
 }
@@ -84,7 +86,7 @@ export type BatchTrackData =
   | BatchTrackDataWithAnonymousId;
 
 export interface BasePageData extends BaseAppData {
-  context: AppDataContext;
+  context?: AppDataContext;
   name?: string;
   properties?: Record<string, any>;
 }
@@ -118,7 +120,7 @@ export type BatchPageData =
   | BatchPageDataWithAnonymousId;
 
 export interface BaseScreenData extends BaseAppData {
-  context: AppDataContext;
+  context?: AppDataContext;
   name?: string;
   properties?: Record<string, any>;
 }
@@ -159,12 +161,16 @@ export type BatchItem =
 
 export interface BatchAppData {
   batch: BatchItem[];
-  context: AppDataContext;
+  context?: AppDataContext;
 }
 
 export interface InitParams {
   writeKey: string;
   host?: string;
+}
+
+interface ErrorResponse {
+  message?: string;
 }
 
 export class DittofeedSdk {
@@ -173,15 +179,44 @@ export class DittofeedSdk {
 
   constructor({ writeKey, host = "https://dittofeed.com" }: InitParams) {
     this.batchQueue = new BatchQueue<BatchItem>({
-      executeBatch: async (data) => {
-        await axios({
-          method: "post",
-          url: `${host}/api/public/apps/batch`,
-          data,
-          headers: {
-            authorization: writeKey,
-          },
-        });
+      timeout: 500,
+      batchSize: 5,
+      executeBatch: async (batch) => {
+        const data: BatchAppData = {
+          batch,
+        };
+        try {
+          const config = {
+            method: "post",
+            url: `${host}/api/public/apps/batch`,
+            data,
+            headers: {
+              authorization: writeKey,
+            },
+          };
+          await axios(config);
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            const axiosError = error as AxiosError<ErrorResponse>;
+            // Handle AxiosError
+
+            if (axiosError.response) {
+              if (axiosError.response?.data?.message) {
+                console.error(
+                  `Dittofeed Error: ${axiosError.response.status} ${axiosError.response.data.message}`
+                );
+              } else {
+                console.error(`Dittofeed Error: ${axiosError.response.status}`);
+              }
+            } else {
+              console.error(
+                `Dittofeed Error: unknown network ${axiosError.message}`
+              );
+            }
+          } else {
+            console.error(`Dittofeed Error: unknown ${String(error)}`);
+          }
+        }
       },
     });
   }
