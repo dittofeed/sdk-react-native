@@ -1163,8 +1163,10 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@dittofeed/sdk-react-native@file:..":
-  version "0.0.1"
+"@dittofeed/sdk-react-native@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@dittofeed/sdk-react-native/-/sdk-react-native-0.1.0.tgz#562b087d0f42330e8714a42a778b1267ab128de5"
+  integrity sha512-C0Ec9Hrrk1NJKf7ALd1CblXZLgrRRCOCM6jRVXco4RTjDMTm/knuKINDVFPY/abNXMc/Y5eT/YRTdV1EkpmzBQ==
   dependencies:
     axios "^1.4.0"
     react-native-uuid "^2.0.1"
