@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { DittofeedSdk } from "./sdk";
+import { DittofeedSdk } from "@dittofeed/sdk-react-native";
 import { useEffect } from "react";
 
 export default function App() {
@@ -9,6 +9,7 @@ export default function App() {
     (async () => {
       await DittofeedSdk.init({
         writeKey: "Basic abcd",
+        host: "http://10.0.2.2j3001",
       });
 
       DittofeedSdk.identify({
