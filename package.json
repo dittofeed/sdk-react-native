@@ -8,7 +8,10 @@
   "files": [
     "dist/"
   ],
-  "repository": "git@github.com:dittofeed/sdk-react-native.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dittofeed/sdk-react-native.git"
+  },
   "author": "max@dittofeed.com",
   "license": "MIT",
   "scripts": {
