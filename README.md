@@ -14,6 +14,7 @@ npm install @dittofeed/sdk-react-native
 
 ## Usage
 
+Dittofeed's react native sdk can be useful for sending Dittofeed events about your application and users.
 
 ```javascript
 import React from "react";
@@ -24,6 +25,9 @@ import { useEffect } from "react";
 export default function App() {
   useEffect(() => {
     (async () => {
+      // Initialize the sdk with a writeKey, which is used to identify your
+      // workspace. This key can be found at
+      // https://dittofeed.com/dashboard/settings
       await DittofeedSdk.init({
         writeKey: "Basic abcdefg...",
       });
