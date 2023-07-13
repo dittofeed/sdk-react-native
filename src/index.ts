@@ -1,3 +1,7 @@
+import axios from "axios";
+import { BatchQueue } from "./batchQueue";
+import { v4 as uuidv4 } from "uuid";
+
 export enum EventType {
   Identify = "identify",
   Track = "track",
@@ -8,7 +12,7 @@ export enum EventType {
 export type AppDataContext = Record<string, any> | undefined;
 
 export interface BaseAppData {
-  messageId: string;
+  messageId?: string;
   timestamp?: string;
 }
 
@@ -160,14 +164,26 @@ export interface BatchAppData {
 
 export interface InitParams {
   writeKey: string;
+  host?: string;
 }
 
 export class DittofeedSdk {
   private static instance: DittofeedSdk;
-  private writeKey: string;
+  private batchQueue: BatchQueue<BatchItem>;
 
-  constructor({ writeKey }: InitParams) {
-    writeKey = writeKey;
+  constructor({ writeKey, host = "https://dittofeed.com" }: InitParams) {
+    this.batchQueue = new BatchQueue<BatchItem>({
+      executeBatch: async (data) => {
+        await axios({
+          method: "post",
+          url: `${host}/api/public/apps/batch`,
+          data,
+          headers: {
+            authorization: writeKey,
+          },
+        });
+      },
+    });
   }
 
   static async init(initParams: InitParams): Promise<DittofeedSdk> {
@@ -177,7 +193,43 @@ export class DittofeedSdk {
     return DittofeedSdk.instance;
   }
 
-  public static async identify(): Promise<void> {
-    console.log("identify");
+  public static identify(params: IdentifyData) {
+    const data: BatchIdentifyData = {
+      messageId: params.messageId ?? uuidv4(),
+      type: EventType.Identify,
+      ...params,
+    };
+    this.instance.batchQueue.submit(data);
+  }
+
+  public static track(params: TrackData) {
+    const data: BatchTrackData = {
+      messageId: params.messageId ?? uuidv4(),
+      type: EventType.Track,
+      ...params,
+    };
+    this.instance.batchQueue.submit(data);
+  }
+
+  public static page(params: PageData) {
+    const data: BatchPageData = {
+      messageId: params.messageId ?? uuidv4(),
+      type: EventType.Page,
+      ...params,
+    };
+    this.instance.batchQueue.submit(data);
+  }
+
+  public static screen(params: ScreenData) {
+    const data: BatchScreenData = {
+      messageId: params.messageId ?? uuidv4(),
+      type: EventType.Screen,
+      ...params,
+    };
+    this.instance.batchQueue.submit(data);
+  }
+
+  public static async flush() {
+    await this.instance.batchQueue.flush();
   }
 }
