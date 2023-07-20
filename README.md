@@ -9,7 +9,7 @@ Dittofeed's react native sdk.
 yarn add @dittofeed/sdk-react-native
 
 # Using NPM
-npm install @dittofeed/sdk-react-native
+npm install --save @dittofeed/sdk-react-native
 ```
 
 ## Usage
